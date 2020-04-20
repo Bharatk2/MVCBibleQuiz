@@ -57,7 +57,8 @@ class ViewController: UIViewController {
     //New button needs to be linked to this IBAction too.
     @IBAction func answerButtonPressed(_ sender: UIButton) {
          let answerChoices = quizBrain.getAnswers()
-       var questionEnd = 11
+        var correctAnswer = 2
+       var questionEnd = 0
         let userAnswer = sender.currentTitle!
         
         let userGotItRight = quizBrain.checkAnswer(userAnswer: userAnswer)
@@ -68,6 +69,7 @@ class ViewController: UIViewController {
             springButtonTapped1(sender)
         } else {
             sender.backgroundColor = UIColor.red
+            alertMessage(ans: quizBrain.getCorrectAnswer())
             
         }
         
@@ -77,13 +79,15 @@ class ViewController: UIViewController {
                               })
         }
         quizBrain.nextQuestion()
-      
-       
-        
+    
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
-        
-
-        
+    }
+    
+    func alertMessage(ans: String) {
+        var alert = UIAlertController(title: "Correct Answer was: ", message: ans, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert, animated: true)
+    
     }
     
     @objc func updateUI() {

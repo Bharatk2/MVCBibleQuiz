@@ -56,6 +56,10 @@ struct QuizBrain {
         return Float(questionNumber) / Float(quiz.count)
     }
     
+    func getCorrectAnswer() -> String {
+        return quiz[questionNumber].rightAnswer
+    }
+    
     mutating func getScore() -> Int {
         return score
     }
